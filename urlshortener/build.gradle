@@ -17,8 +17,11 @@ configurations {
 
 repositories {
 	mavenCentral()
-	mavenLocal()
-	maven { url "https://repo1.maven.org/maven2" }
+}
+configurations {
+	all {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
 }
 
 dependencies {
