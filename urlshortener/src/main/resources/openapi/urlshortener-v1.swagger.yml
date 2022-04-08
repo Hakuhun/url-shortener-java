@@ -1,0 +1,95 @@
+openapi: 3.0.1
+info:
+  title: Url Shortener API definitions
+  description: 'This is a sample interface description for my demo project Url Shortener.
+  In this project you can add urls and define a shorter url for it, let the system choose some name for it. UwU'
+  contact:
+    email: hakuhun@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: https://localhost:8010
+tags:
+  - name: Url Shortener
+    description: Describe elements required to an url shortener
+paths:
+  /shortener/url:
+    post:
+      tags:
+        - url
+      summary: Add a new url to redirect to a page with a shorter alias
+      operationId: addShortenedUrl
+      parameters:
+        - name: apiKey
+          in: header
+          schema:
+            type: string
+      requestBody:
+        description: An object what represents a shortened alias.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UrlShorts'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UrlShorts'
+        required: true
+      responses:
+        201:
+          description: A new alias has been created
+        405:
+          description: Invalid input
+          content: {}
+      security:
+        - api_key: []
+  /redirect/{requestedAlias}:
+    post:
+      tags:
+        - redirect
+      summary: Redirects you tu the requested alias
+      operationId: redirects
+      parameters:
+        - name: requestedAlias
+          in: path
+          description: the alias of a shortened url
+          required: true
+          schema:
+            type: string
+      responses:
+        301:
+          description: A redirect to another page
+          content: {}
+        404:
+          description: Gives an error mesage caused by an unreachable resource (mo such url alias exists)
+components:
+  schemas:
+    UrlShorts:
+      type: object
+      required: [originalUrl]
+      properties:
+        id:
+          type: string
+        originalUrl:
+          type: string
+        requestedUrl:
+          type: string
+        requester:
+          $ref: '#/components/schemas/Requester'
+        status:
+          type: string
+          enum: [ READY, COMPROMISED, NOT_EXISTS ]
+        creationDate:
+          type: string
+          format: date
+    Requester:
+      type: object
+      properties:
+        email:
+          type: string
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
