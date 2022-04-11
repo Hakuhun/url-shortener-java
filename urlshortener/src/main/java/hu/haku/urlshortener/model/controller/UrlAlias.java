@@ -5,6 +5,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import hu.haku.urlshortener.model.controller.Report;
 import hu.haku.urlshortener.model.controller.Requester;
 import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,11 +20,11 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * UrlShorts
+ * UrlAlias
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-04-08T02:33:27.185+02:00[Europe/Prague]")
-public class UrlShorts   {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-04-11T03:01:41.659+02:00[Europe/Prague]")
+public class UrlAlias   {
 
   @JsonProperty("id")
   private String id;
@@ -31,8 +32,11 @@ public class UrlShorts   {
   @JsonProperty("originalUrl")
   private String originalUrl;
 
-  @JsonProperty("requestedUrl")
-  private String requestedUrl;
+  @JsonProperty("requestedAlias")
+  private String requestedAlias;
+
+  @JsonProperty("report")
+  private Report report;
 
   @JsonProperty("requester")
   private Requester requester;
@@ -45,7 +49,7 @@ public class UrlShorts   {
     
     COMPROMISED("COMPROMISED"),
     
-    NOT_EXISTS("NOT_EXISTS");
+    DELETED("DELETED");
 
     private String value;
 
@@ -81,7 +85,7 @@ public class UrlShorts   {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate creationDate;
 
-  public UrlShorts id(String id) {
+  public UrlAlias id(String id) {
     this.id = id;
     return this;
   }
@@ -100,7 +104,7 @@ public class UrlShorts   {
     this.id = id;
   }
 
-  public UrlShorts originalUrl(String originalUrl) {
+  public UrlAlias originalUrl(String originalUrl) {
     this.originalUrl = originalUrl;
     return this;
   }
@@ -119,26 +123,45 @@ public class UrlShorts   {
     this.originalUrl = originalUrl;
   }
 
-  public UrlShorts requestedUrl(String requestedUrl) {
-    this.requestedUrl = requestedUrl;
+  public UrlAlias requestedAlias(String requestedAlias) {
+    this.requestedAlias = requestedAlias;
     return this;
   }
 
   /**
-   * Get requestedUrl
-   * @return requestedUrl
+   * Get requestedAlias
+   * @return requestedAlias
   */
   
-  @Schema(name = "requestedUrl", required = false)
-  public String getRequestedUrl() {
-    return requestedUrl;
+  @Schema(name = "requestedAlias", required = false)
+  public String getRequestedAlias() {
+    return requestedAlias;
   }
 
-  public void setRequestedUrl(String requestedUrl) {
-    this.requestedUrl = requestedUrl;
+  public void setRequestedAlias(String requestedAlias) {
+    this.requestedAlias = requestedAlias;
   }
 
-  public UrlShorts requester(Requester requester) {
+  public UrlAlias report(Report report) {
+    this.report = report;
+    return this;
+  }
+
+  /**
+   * Get report
+   * @return report
+  */
+  @Valid 
+  @Schema(name = "report", required = false)
+  public Report getReport() {
+    return report;
+  }
+
+  public void setReport(Report report) {
+    this.report = report;
+  }
+
+  public UrlAlias requester(Requester requester) {
     this.requester = requester;
     return this;
   }
@@ -157,7 +180,7 @@ public class UrlShorts   {
     this.requester = requester;
   }
 
-  public UrlShorts status(StatusEnum status) {
+  public UrlAlias status(StatusEnum status) {
     this.status = status;
     return this;
   }
@@ -176,7 +199,7 @@ public class UrlShorts   {
     this.status = status;
   }
 
-  public UrlShorts creationDate(LocalDate creationDate) {
+  public UrlAlias creationDate(LocalDate creationDate) {
     this.creationDate = creationDate;
     return this;
   }
@@ -203,27 +226,29 @@ public class UrlShorts   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UrlShorts urlShorts = (UrlShorts) o;
-    return Objects.equals(this.id, urlShorts.id) &&
-        Objects.equals(this.originalUrl, urlShorts.originalUrl) &&
-        Objects.equals(this.requestedUrl, urlShorts.requestedUrl) &&
-        Objects.equals(this.requester, urlShorts.requester) &&
-        Objects.equals(this.status, urlShorts.status) &&
-        Objects.equals(this.creationDate, urlShorts.creationDate);
+    UrlAlias urlAlias = (UrlAlias) o;
+    return Objects.equals(this.id, urlAlias.id) &&
+        Objects.equals(this.originalUrl, urlAlias.originalUrl) &&
+        Objects.equals(this.requestedAlias, urlAlias.requestedAlias) &&
+        Objects.equals(this.report, urlAlias.report) &&
+        Objects.equals(this.requester, urlAlias.requester) &&
+        Objects.equals(this.status, urlAlias.status) &&
+        Objects.equals(this.creationDate, urlAlias.creationDate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, originalUrl, requestedUrl, requester, status, creationDate);
+    return Objects.hash(id, originalUrl, requestedAlias, report, requester, status, creationDate);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UrlShorts {\n");
+    sb.append("class UrlAlias {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    originalUrl: ").append(toIndentedString(originalUrl)).append("\n");
-    sb.append("    requestedUrl: ").append(toIndentedString(requestedUrl)).append("\n");
+    sb.append("    requestedAlias: ").append(toIndentedString(requestedAlias)).append("\n");
+    sb.append("    report: ").append(toIndentedString(report)).append("\n");
     sb.append("    requester: ").append(toIndentedString(requester)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    creationDate: ").append(toIndentedString(creationDate)).append("\n");

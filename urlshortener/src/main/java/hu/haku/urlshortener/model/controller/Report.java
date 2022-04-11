@@ -15,16 +15,19 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * Requester
+ * Report
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-04-11T03:01:41.659+02:00[Europe/Prague]")
-public class Requester   {
+public class Report   {
 
   @JsonProperty("email")
   private String email;
 
-  public Requester email(String email) {
+  @JsonProperty("reason")
+  private String reason;
+
+  public Report email(String email) {
     this.email = email;
     return this;
   }
@@ -43,6 +46,25 @@ public class Requester   {
     this.email = email;
   }
 
+  public Report reason(String reason) {
+    this.reason = reason;
+    return this;
+  }
+
+  /**
+   * Get reason
+   * @return reason
+  */
+  
+  @Schema(name = "reason", required = false)
+  public String getReason() {
+    return reason;
+  }
+
+  public void setReason(String reason) {
+    this.reason = reason;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -51,20 +73,22 @@ public class Requester   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Requester requester = (Requester) o;
-    return Objects.equals(this.email, requester.email);
+    Report report = (Report) o;
+    return Objects.equals(this.email, report.email) &&
+        Objects.equals(this.reason, report.reason);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email);
+    return Objects.hash(email, reason);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Requester {\n");
+    sb.append("class Report {\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
     sb.append("}");
     return sb.toString();
   }

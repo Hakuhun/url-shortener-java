@@ -1,0 +1,44 @@
+{
+  "info": {
+    "_postman_id": "22197637-d3fe-4d7e-b1d2-db5aa17ca29c",
+    "name": "UrlShorter",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Redirect",
+      "id": "68be99fb-1efb-4429-9c29-6dcb6e657196",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:8010/redirect/atomicMongo"
+      },
+      "response": []
+    },
+    {
+      "name": "Add new alias",
+      "id": "b9d15dd4-23e7-47fb-8d64-6b8f5e739d66",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Forwarded-For",
+            "value": "192.168.1.1",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"originalUrl\":\"https://kamranzafar.org/2016/10/25/atomic-updates-on-mongodb-with-spring-data/\",\r\n    \"requestedAlias\":\"atomicMongo\",\r\n    \"requester\":{\r\n        \"email\":\"hakuhun@gmail.com\"\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8010/url/shorten"
+      },
+      "response": []
+    }
+  ]
+}

@@ -17,8 +17,11 @@ configurations {
 
 repositories {
 	mavenCentral()
-	mavenLocal()
-	maven { url "https://repo1.maven.org/maven2" }
+}
+configurations {
+	all {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
 }
 
 dependencies {
@@ -32,7 +35,6 @@ dependencies {
 	implementation 'org.modelmapper:modelmapper-module-java8:1.2.2'
 	implementation 'org.modelmapper:modelmapper:3.1.0'
 	implementation 'org.modelmapper:modelmapper-module-java8-datatypes:1.2.2'
-
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -62,6 +64,11 @@ openApiGenerate {
 }
 
 tasks.openApiGenerate {
+	doFirst{
+		delete (
+				"$rootDir/src/main/java/hu/haku/urlshortener/model/controller"
+		)
+	}
 	doLast {
 		delete (
 				"$rootDir/.openapi-generator",
