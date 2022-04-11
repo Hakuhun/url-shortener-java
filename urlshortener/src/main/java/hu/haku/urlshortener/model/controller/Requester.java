@@ -18,7 +18,7 @@ import javax.annotation.Generated;
  * Requester
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-04-11T01:28:37.736+02:00[Europe/Prague]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-04-11T03:01:41.659+02:00[Europe/Prague]")
 public class Requester   {
 
   @JsonProperty("email")
