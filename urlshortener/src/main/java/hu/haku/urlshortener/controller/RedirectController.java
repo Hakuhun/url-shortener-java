@@ -6,13 +6,11 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.websocket.server.PathParam;
-
 @Log4j2
 @RestController
 @RequestMapping("/redirect")
 @RequiredArgsConstructor
-public class UrlRedirecterController {
+public class RedirectController {
     private final UrlAliasService urlShortenerService;
 
     //@PutMapping("/{requestedAlias}")
