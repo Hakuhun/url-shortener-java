@@ -15,10 +15,10 @@ tags:
   - name: Url Shortener
     description: Describe elements required to an url shortener
 paths:
-  /shortener/url:
+  /url/shorten:
     post:
       tags:
-        - url
+        - Alias creation
       summary: Add a new url to redirect to a page with a shorter alias
       operationId: addShortenedUrl
       parameters:
@@ -31,25 +31,52 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UrlShorts'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/UrlShorts'
+              $ref: '#/components/schemas/UrlAlias'
         required: true
       responses:
         201:
-          description: A new alias has been created
+          description: CREATED - A new alias has been created
+        403:
+          description: ALREADY_USED - This happens when the provided alias has been used for anouther shortening.
         405:
           description: Invalid input
           content: {}
       security:
         - api_key: []
-  /redirect/{requestedAlias}:
-    post:
+  /url/report/{requestedAlias}:
+    patch:
       tags:
-        - redirect
-      summary: Redirects you tu the requested alias
-      operationId: redirects
+        - Add a report to an alias
+      summary: A way to report unwanted and inappropriate aliases.
+      operationId: reportAlias
+      parameters:
+        - name: apiKey
+          in: header
+          schema:
+            type: string
+        - name: requestedAlias
+          in: path
+          description: the alias of a shortened url
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: An object what represents a shortened alias.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UrlAlias'
+      responses:
+        200:
+          description: OK - a user report has been added to the alias as a flag
+        404:
+          description: NOT_FOUND - the reported alias does not exists
+  /redirect/{requestedAlias}:
+    put:
+      tags:
+        - Redirecting
+      summary: Redirecting a user with an alias to the original link
+      operationId: redirectingToOriginal
       parameters:
         - name: requestedAlias
           in: path
@@ -62,10 +89,10 @@ paths:
           description: A redirect to another page
           content: {}
         404:
-          description: Gives an error mesage caused by an unreachable resource (mo such url alias exists)
+          description: NOT_FOUND - the alias does not exists
 components:
   schemas:
-    UrlShorts:
+    UrlAlias:
       type: object
       required: [originalUrl]
       properties:
@@ -73,13 +100,15 @@ components:
           type: string
         originalUrl:
           type: string
-        requestedUrl:
+        requestedAlias:
           type: string
+        report:
+          $ref: '#/components/schemas/Report'
         requester:
           $ref: '#/components/schemas/Requester'
         status:
           type: string
-          enum: [ READY, COMPROMISED, NOT_EXISTS ]
+          enum: [ READY, COMPROMISED, DELETED ]
         creationDate:
           type: string
           format: date
@@ -87,6 +116,12 @@ components:
       type: object
       properties:
         email:
+          type: string
+    Report:
+      properties:
+        email:
+          type: string
+        reason:
           type: string
   securitySchemes:
     api_key:

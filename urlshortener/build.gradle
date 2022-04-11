@@ -36,7 +36,6 @@ dependencies {
 	implementation 'org.modelmapper:modelmapper:3.1.0'
 	implementation 'org.modelmapper:modelmapper-module-java8-datatypes:1.2.2'
 
-
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -65,6 +64,11 @@ openApiGenerate {
 }
 
 tasks.openApiGenerate {
+	doFirst{
+		delete (
+				"$rootDir/src/main/java/hu/haku/urlshortener/model/controller"
+		)
+	}
 	doLast {
 		delete (
 				"$rootDir/.openapi-generator",

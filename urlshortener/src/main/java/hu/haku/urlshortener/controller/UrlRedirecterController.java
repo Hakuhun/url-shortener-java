@@ -1,20 +1,26 @@
 package hu.haku.urlshortener.controller;
 
+import hu.haku.urlshortener.service.UrlAliasService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.websocket.server.PathParam;
 
 @Log4j2
 @RestController
-@RequestMapping("/redirect/")
+@RequestMapping("/redirect")
+@RequiredArgsConstructor
 public class UrlRedirecterController {
-    @PostMapping("/{requestedAlias}")
-    public RedirectView queryUrl(@PathParam("requestedAlias") String requestedAlias){
-        return new RedirectView(requestedAlias);
+    private final UrlAliasService urlShortenerService;
+
+    //@PutMapping("/{requestedAlias}")
+    @GetMapping("/{requestedAlias}")
+    public RedirectView queryUrl(@PathVariable("requestedAlias") String requestedAlias){
+        String originalUrl = urlShortenerService.getOriginalUrl(requestedAlias);
+        log.info("A redirect happened from "+requestedAlias + " to " + originalUrl);
+        return new RedirectView(originalUrl);
     }
+
 }

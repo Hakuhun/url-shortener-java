@@ -5,7 +5,7 @@ spring:
     banner-mode: "off"
   data:
     mongodb:
-      uri: mongodb://sern_admin:sern_admin_password@localhost:27017/urlShorts
+      uri: mongodb://urlAliases:urlAliases@localhost:27017/urlAliases
       auto-index-creation: true
 
 management:
