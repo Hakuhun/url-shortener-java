@@ -16,6 +16,8 @@ public class MDBUrlAlias {
     public static final String FIELD_REQUESTED_ALIAS = "requestedAlias";
     public static final String FIELD_TIMES_VISITED = "timesVisited";
     public static final String FIELD_LAST_VISITED = "lastVisited";
+    public static final String FIELD_REPORTS = "reports";
+    public static final String FIELD_STATUS = "status";
 
     @Id
     private ObjectId _id;

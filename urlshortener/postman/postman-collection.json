@@ -1,13 +1,13 @@
 {
   "info": {
-    "_postman_id": "22197637-d3fe-4d7e-b1d2-db5aa17ca29c",
+    "_postman_id": "22da749f-b4e5-49c7-bafe-8688008eb3f0",
     "name": "UrlShorter",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
   "item": [
     {
       "name": "Redirect",
-      "id": "68be99fb-1efb-4429-9c29-6dcb6e657196",
+      "id": "185846e4-2190-4c53-b5e8-6b183cc72f3f",
       "request": {
         "method": "GET",
         "header": [],
@@ -17,7 +17,7 @@
     },
     {
       "name": "Add new alias",
-      "id": "b9d15dd4-23e7-47fb-8d64-6b8f5e739d66",
+      "id": "0190ef19-7011-48ff-b052-85658db628d6",
       "request": {
         "method": "POST",
         "header": [
@@ -25,11 +25,16 @@
             "key": "X-Forwarded-For",
             "value": "192.168.1.1",
             "type": "text"
+          },
+          {
+            "key": "x-api-key",
+            "value": "internalTesting",
+            "type": "text"
           }
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"originalUrl\":\"https://kamranzafar.org/2016/10/25/atomic-updates-on-mongodb-with-spring-data/\",\r\n    \"requestedAlias\":\"atomicMongo\",\r\n    \"requester\":{\r\n        \"email\":\"hakuhun@gmail.com\"\r\n    }\r\n}",
+          "raw": "{\r\n    \"originalUrl\":\"https://kamranzafar.org/2016/10/25/atomic-updates-on-mongodb-with-spring-data/\",\r\n    \"requestedAlias\":\"atomicMongo2\",\r\n    \"requester\":{\r\n        \"email\":\"hakuhun@gmail.com\"\r\n    }\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -37,6 +42,36 @@
           }
         },
         "url": "http://localhost:8010/url/shorten"
+      },
+      "response": []
+    },
+    {
+      "name": "File a report",
+      "id": "5f4dc9dd-2721-494a-9aab-eb54b11dab27",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "X-Forwarded-For",
+            "value": "192.168.1.1",
+            "type": "text"
+          },
+          {
+            "key": "x-api-key",
+            "value": "internalTesting",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"report\":         {\r\n            \"email\": \"hakuhun@gmail.com\",\r\n            \"reason\": \"I said so 2 times\"\r\n        }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "http://localhost:8010/url/report/atomicMongo2"
       },
       "response": []
     }

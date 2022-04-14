@@ -22,7 +22,7 @@ paths:
       summary: Add a new url to redirect to a page with a shorter alias
       operationId: addShortenedUrl
       parameters:
-        - name: apiKey
+        - name: x-api-key
           in: header
           schema:
             type: string
@@ -36,21 +36,23 @@ paths:
       responses:
         201:
           description: CREATED - A new alias has been created
+        401:
+          description: UNAUTHORIZED - No acces right for the requested operation
         403:
           description: ALREADY_USED - This happens when the provided alias has been used for anouther shortening.
         405:
           description: Invalid input
           content: {}
       security:
-        - api_key: []
+        - ApiKeyAuth: []
   /url/report/{requestedAlias}:
     patch:
       tags:
-        - Add a report to an alias
+        - File a report to an alias
       summary: A way to report unwanted and inappropriate aliases.
       operationId: reportAlias
       parameters:
-        - name: apiKey
+        - name: x-api-key
           in: header
           schema:
             type: string
@@ -69,10 +71,14 @@ paths:
       responses:
         200:
           description: OK - a user report has been added to the alias as a flag
+        401:
+          description: UNAUTHORIZED - No acces right for the requested operation
         404:
           description: NOT_FOUND - the reported alias does not exists
+      security:
+        - ApiKeyAuth: [ ]
   /redirect/{requestedAlias}:
-    put:
+    get:
       tags:
         - Redirecting
       summary: Redirecting a user with an alias to the original link
@@ -124,7 +130,7 @@ components:
         reason:
           type: string
   securitySchemes:
-    api_key:
+    ApiKeyAuth:
       type: apiKey
-      name: api_key
       in: header
+      name: x-api-key

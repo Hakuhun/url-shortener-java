@@ -27,3 +27,12 @@ server:
     max-threads: 400
     max-connections: 400
     accept-count: 40
+
+api:
+  keys:
+    publicApiKey:
+      accessTo: create, report
+    internalTesting:
+      accessTo: "*"
+    backOffice:
+      accessTo: create, report, listReport

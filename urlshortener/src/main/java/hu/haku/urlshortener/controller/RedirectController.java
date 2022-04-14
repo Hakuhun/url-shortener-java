@@ -13,12 +13,14 @@ import org.springframework.web.servlet.view.RedirectView;
 public class RedirectController {
     private final UrlAliasService urlShortenerService;
 
-    //@PutMapping("/{requestedAlias}")
     @GetMapping("/{requestedAlias}")
     public RedirectView queryUrl(@PathVariable("requestedAlias") String requestedAlias){
         String originalUrl = urlShortenerService.getOriginalUrl(requestedAlias);
         log.info("A redirect happened from "+requestedAlias + " to " + originalUrl);
-        return new RedirectView(originalUrl);
+        RedirectView redirectView = new RedirectView(originalUrl);
+        redirectView.setContextRelative(false);
+
+        return redirectView;
     }
 
 }
